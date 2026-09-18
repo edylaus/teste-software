@@ -7,11 +7,14 @@ class Fornecedor {
   constructor(row) {
     this.id = row.id_fornecedor;
     this.razaoSocial = row.razao_social;
+    this.nomeFantasia = row.nome_fantasia;
     this.cnpj = row.cnpj;
-    this.endereco = row.endereco;
     this.telefone = row.telefone;
     this.email = row.email;
-    this.segmento = row.segmento;
+    this.cep = row.cep;
+    this.cidade = row.cidade;
+    this.uf = row.uf;
+    this.categoria = row.categoria;
     this.status = row.status;
     this.dataCadastro = row.data_cadastro;
     this.dataAtualizacao = row.data_atualizacao;

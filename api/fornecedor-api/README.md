@@ -6,35 +6,36 @@ API REST para o gerenciamento de fornecedores, desenvolvida como projeto acadêm
 
 Permitir o gerenciamento completo de fornecedores:
 
-- Cadastrar fornecedor
-- Listar fornecedores
-- Consultar fornecedor por ID
-- Consultar fornecedor por CNPJ
-- Atualizar fornecedor
-- Inativar fornecedor
-- Reativar fornecedor
-- Excluir fornecedor
-- Validar os dados recebidos
-- Impedir CNPJ duplicado
+* Cadastrar fornecedor
+* Listar fornecedores
+* Consultar fornecedor por ID
+* Consultar fornecedor por CNPJ
+* Atualizar fornecedor
+* Inativar fornecedor
+* Reativar fornecedor
+* Excluir fornecedor
+* Validar os dados recebidos
+* Impedir CNPJ duplicado
 
 ## 2. Tecnologias
 
-- Node.js
-- Express.js
-- MySQL (via `mysql2`)
-- npm
-- Swagger / OpenAPI (`swagger-jsdoc` + `swagger-ui-express`)
-- Jest + Supertest (testes automatizados)
+* Node.js
+* Express.js
+* MySQL (via `mysql2`)
+* npm
+* Swagger / OpenAPI (`swagger-jsdoc` + `swagger-ui-express`)
+* Jest + Supertest (testes automatizados)
 
 Arquitetura em camadas: `routes` → `controllers` → `services` → `repositories`, com `models` e `middlewares` de apoio.
 
-```
+```text
 fornecedor-api/
+
 │
 ├── src/
 │   ├── config/
-│   │   ├── database.js      # pool de conexão MySQL
-│   │   └── swagger.js       # configuração do Swagger/OpenAPI
+│   │   ├── database.js       # pool de conexão MySQL
+│   │   └── swagger.js        # configuração do Swagger/OpenAPI
 │   ├── controllers/
 │   │   └── fornecedorController.js
 │   ├── middlewares/
@@ -64,13 +65,15 @@ fornecedor-api/
 
 ## 3. Requisitos
 
-- Node.js 18 ou superior
-- MySQL 8 (ou compatível) instalado e em execução
-- npm
+* Node.js 18 ou superior
+* MySQL 8 (ou compatível) instalado e em execução
+* npm
 
 ## 4. Instalação do Node.js
 
-Baixe e instale em: https://nodejs.org/
+Baixe e instale em:
+
+https://nodejs.org/
 
 Verifique a instalação:
 
@@ -90,6 +93,7 @@ npm install
 ## 6. Configuração do MySQL
 
 1. Certifique-se de que o serviço do MySQL está em execução.
+
 2. Execute o script `database.sql`, que cria o banco `fornecedor`, a tabela `fornecedores`, os índices, as constraints e os dados de exemplo:
 
 ```bash
@@ -97,6 +101,28 @@ mysql -u root -p < database.sql
 ```
 
 Isso cria automaticamente o banco `fornecedor` — não é necessário criá-lo manualmente antes.
+
+### Estrutura dos dados do fornecedor
+
+A tabela `fornecedores` possui os seguintes campos:
+
+| Campo              | Tipo         | Obrigatório | Descrição                         |
+| ------------------ | ------------ | ----------- | --------------------------------- |
+| `id_fornecedor`    | INT          | Sim         | Identificador único do fornecedor |
+| `razao_social`     | VARCHAR(150) | Sim         | Razão social da empresa           |
+| `nome_fantasia`    | VARCHAR(150) | Não         | Nome fantasia                     |
+| `cnpj`             | CHAR(14)     | Sim         | CNPJ do fornecedor                |
+| `telefone`         | VARCHAR(20)  | Sim         | Telefone de contato               |
+| `email`            | VARCHAR(150) | Sim         | E-mail de contato                 |
+| `cep`              | VARCHAR(9)   | Não         | CEP do fornecedor                 |
+| `cidade`           | VARCHAR(100) | Não         | Cidade                            |
+| `uf`               | VARCHAR(2)   | Não         | Unidade Federativa                |
+| `categoria`        | VARCHAR(100) | Sim         | Categoria/segmento do fornecedor  |
+| `status`           | ENUM         | Sim         | `ATIVO` ou `INATIVO`              |
+| `data_cadastro`    | DATETIME     | Sim         | Data de cadastro                  |
+| `data_atualizacao` | DATETIME     | Sim         | Data da última atualização        |
+
+Os campos `status`, `data_cadastro` e `data_atualizacao` são controlados automaticamente pelo banco de dados.
 
 ## 7. Configuração do `.env`
 
@@ -108,7 +134,7 @@ cp .env.example .env
 
 Edite `.env` com as credenciais do seu MySQL:
 
-```
+```text
 DB_HOST=localhost
 DB_PORT=3306
 DB_NAME=fornecedor
@@ -128,7 +154,7 @@ npm start
 
 Saída esperada:
 
-```
+```text
 Conexão com o MySQL estabelecida com sucesso.
 Servidor rodando em http://localhost:3000
 Documentação Swagger disponível em http://localhost:3000/api-docs
@@ -146,7 +172,19 @@ npm run dev
 npm test
 ```
 
-Os testes usam Jest + Supertest e cobrem: cadastro válido, campos obrigatórios ausentes, CNPJ inválido, CNPJ duplicado, listagem, consulta por ID, fornecedor inexistente, atualização, inativação, reativação e exclusão.
+Os testes usam Jest + Supertest e cobrem:
+
+* cadastro válido
+* campos obrigatórios ausentes
+* CNPJ inválido
+* CNPJ duplicado
+* listagem
+* consulta por ID
+* fornecedor inexistente
+* atualização
+* inativação
+* reativação
+* exclusão
 
 > Os testes acessam o banco configurado em `.env` (`DB_NAME_TEST` ou `DB_NAME`) e limpam a tabela `fornecedores` a cada execução — não rode os testes apontando para um banco de produção com dados importantes.
 
@@ -154,7 +192,7 @@ Os testes usam Jest + Supertest e cobrem: cadastro válido, campos obrigatórios
 
 Com a API em execução, acesse:
 
-```
+```text
 http://localhost:3000/api-docs
 ```
 
@@ -162,20 +200,20 @@ Lá é possível visualizar e testar todos os endpoints diretamente pelo navegad
 
 ## 11. Endpoints
 
-| Método | Rota                                   | Descrição                          |
-|--------|-----------------------------------------|-------------------------------------|
-| POST   | `/api/fornecedores`                    | Cadastra um novo fornecedor         |
-| GET    | `/api/fornecedores`                    | Lista todos os fornecedores         |
-| GET    | `/api/fornecedores/:id`                | Consulta fornecedor por ID          |
-| GET    | `/api/fornecedores/cnpj/:cnpj`         | Consulta fornecedor por CNPJ        |
-| PUT    | `/api/fornecedores/:id`                | Atualiza um fornecedor              |
-| PATCH  | `/api/fornecedores/:id/inativar`       | Inativa um fornecedor               |
-| PATCH  | `/api/fornecedores/:id/reativar`       | Reativa um fornecedor               |
-| DELETE | `/api/fornecedores/:id`                | Exclui um fornecedor                |
+| Método | Rota                             | Descrição                    |
+| ------ | -------------------------------- | ---------------------------- |
+| POST   | `/api/fornecedores`              | Cadastra um novo fornecedor  |
+| GET    | `/api/fornecedores`              | Lista todos os fornecedores  |
+| GET    | `/api/fornecedores/:id`          | Consulta fornecedor por ID   |
+| GET    | `/api/fornecedores/cnpj/:cnpj`   | Consulta fornecedor por CNPJ |
+| PUT    | `/api/fornecedores/:id`          | Atualiza um fornecedor       |
+| PATCH  | `/api/fornecedores/:id/inativar` | Inativa um fornecedor        |
+| PATCH  | `/api/fornecedores/:id/reativar` | Reativa um fornecedor        |
+| DELETE | `/api/fornecedores/:id`          | Exclui um fornecedor         |
 
 ## 12. Exemplos de requisições
 
-> Observação: os CNPJs inseridos pelo `database.sql` são fictícios e usados apenas para demonstrar a listagem. Para **cadastrar** um fornecedor pela API, use um CNPJ com dígitos verificadores matematicamente válidos, como nos exemplos abaixo.
+> Observação: os CNPJs inseridos pelo `database.sql` são fictícios e usados apenas para demonstrar a listagem. Para **cadastrar** um fornecedor pela API, use um CNPJ com dígitos verificadores matematicamente válidos.
 
 ### Cadastrar fornecedor
 
@@ -184,11 +222,14 @@ curl -X POST http://localhost:3000/api/fornecedores \
   -H "Content-Type: application/json" \
   -d '{
     "razaoSocial": "Empresa Exemplo LTDA",
+    "nomeFantasia": "Empresa Exemplo",
     "cnpj": "12345678000195",
-    "endereco": "Rua Exemplo, 100",
     "telefone": "(62) 99999-9999",
     "email": "contato@empresa.com",
-    "segmento": "Tecnologia"
+    "cep": "74000000",
+    "cidade": "Goiânia",
+    "uf": "GO",
+    "categoria": "Tecnologia"
   }'
 ```
 
@@ -198,11 +239,14 @@ Resposta (HTTP 201):
 {
   "id": 6,
   "razaoSocial": "Empresa Exemplo LTDA",
+  "nomeFantasia": "Empresa Exemplo",
   "cnpj": "12345678000195",
-  "endereco": "Rua Exemplo, 100",
   "telefone": "(62) 99999-9999",
   "email": "contato@empresa.com",
-  "segmento": "Tecnologia",
+  "cep": "74000000",
+  "cidade": "Goiânia",
+  "uf": "GO",
+  "categoria": "Tecnologia",
   "status": "ATIVO",
   "dataCadastro": "2026-09-15 10:00:00",
   "dataAtualizacao": "2026-09-15 10:00:00"
@@ -234,67 +278,8 @@ curl -X PUT http://localhost:3000/api/fornecedores/6 \
   -H "Content-Type: application/json" \
   -d '{
     "razaoSocial": "Empresa Exemplo Atualizada LTDA",
+    "nomeFantasia": "Empresa Exemplo Atualizada",
     "cnpj": "12345678000195",
-    "endereco": "Rua Exemplo, 200",
     "telefone": "(62) 98888-8888",
-    "email": "novo-contato@empresa.com",
-    "segmento": "Tecnologia"
-  }'
+    "email": "
 ```
-
-### Inativar fornecedor
-
-```bash
-curl -X PATCH http://localhost:3000/api/fornecedores/6/inativar
-```
-
-### Reativar fornecedor
-
-```bash
-curl -X PATCH http://localhost:3000/api/fornecedores/6/reativar
-```
-
-### Excluir fornecedor
-
-```bash
-curl -X DELETE http://localhost:3000/api/fornecedores/6
-```
-
-### Exemplo de erro (CNPJ inválido)
-
-```json
-{
-  "status": 400,
-  "mensagem": "CNPJ inválido"
-}
-```
-
-### Exemplo de erro (CNPJ duplicado)
-
-```json
-{
-  "status": 409,
-  "mensagem": "Já existe um fornecedor cadastrado com este CNPJ"
-}
-```
-
-### Exemplo de erro (fornecedor inexistente)
-
-```json
-{
-  "status": 404,
-  "mensagem": "Fornecedor não encontrado"
-}
-```
-
-## 13. Códigos HTTP utilizados
-
-| Código | Significado             |
-|--------|--------------------------|
-| 200    | Sucesso                  |
-| 201    | Criado                   |
-| 204    | Sucesso sem conteúdo     |
-| 400    | Dados inválidos          |
-| 404    | Não encontrado           |
-| 409    | Conflito (CNPJ duplicado)|
-| 500    | Erro interno             |

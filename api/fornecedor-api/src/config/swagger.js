@@ -20,15 +20,60 @@ const options = {
         Fornecedor: {
           type: 'object',
           properties: {
-            id: { type: 'integer', example: 1 },
-            razaoSocial: { type: 'string', example: 'Empresa Exemplo LTDA' },
-            cnpj: { type: 'string', example: '12345678000199' },
-            endereco: { type: 'string', example: 'Rua Exemplo, 100' },
-            telefone: { type: 'string', example: '(62) 99999-9999' },
-            email: { type: 'string', example: 'contato@empresa.com' },
-            segmento: { type: 'string', example: 'Tecnologia' },
-            status: { type: 'string', enum: ['ATIVO', 'INATIVO'], example: 'ATIVO' },
-            dataCadastro: { type: 'string', format: 'date-time' },
+            id: {
+              type: 'integer',
+              example: 1,
+            },
+            razaoSocial: {
+              type: 'string',
+              example: 'Empresa Exemplo LTDA',
+            },
+            nomeFantasia: {
+              type: 'string',
+              nullable: true,
+              example: 'Empresa Exemplo',
+            },
+            cnpj: {
+              type: 'string',
+              example: '12345678000199',
+            },
+            telefone: {
+              type: 'string',
+              example: '(62) 99999-9999',
+            },
+            email: {
+              type: 'string',
+              format: 'email',
+              example: 'contato@empresa.com',
+            },
+            cep: {
+              type: 'string',
+              nullable: true,
+              example: '74000000',
+            },
+            cidade: {
+              type: 'string',
+              nullable: true,
+              example: 'Goiânia',
+            },
+            uf: {
+              type: 'string',
+              nullable: true,
+              example: 'GO',
+            },
+            categoria: {
+              type: 'string',
+              example: 'Tecnologia',
+            },
+            status: {
+              type: 'string',
+              enum: ['ATIVO', 'INATIVO'],
+              example: 'ATIVO',
+            },
+            dataCadastro: {
+              type: 'string',
+              format: 'date-time',
+            },
             dataAtualizacao: { type: 'string', format: 'date-time' },
           },
         },
@@ -36,12 +81,8 @@ const options = {
           type: 'object',
           required: ['razaoSocial', 'cnpj', 'endereco', 'telefone', 'email', 'segmento'],
           properties: {
-            razaoSocial: { type: 'string', example: 'Empresa Exemplo LTDA' },
-            cnpj: { type: 'string', example: '12345678000199' },
-            endereco: { type: 'string', example: 'Rua Exemplo, 100' },
-            telefone: { type: 'string', example: '(62) 99999-9999' },
-            email: { type: 'string', example: 'contato@empresa.com' },
-            segmento: { type: 'string', example: 'Tecnologia' },
+            razaoSocial: { type: 'string', example: 'Empresa Exemplo LTDA', }, nomeFantasia: { type: 'string', nullable: true, example: 'Empresa Exemplo', }, cnpj: { type: 'string', example: '12345678000199', }, telefone: { type: 'string', example: '(62) 99999-9999', }, email: { type: 'string', format: 'email', example: 'contato@empresa.com', }, cep: { type: 'string', nullable: true, example: '74000000', }, cidade: { type: 'string', nullable: true, example: 'Goiânia', }, uf: { type: 'string', nullable: true, example: 'GO', },
+            categoria: { type: 'string', example: 'Tecnologia' },
           },
         },
         ErroPadrao: {
