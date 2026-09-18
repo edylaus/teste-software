@@ -1,0 +1,15 @@
+npm install
+{mysql -u root -p < database.sql ou Get-Content database.sql | mysql -u root -p} *Ou rode direto no MySQL Workbench e n
+cp .env.example .env
+npm start
+
+
+Documentação Swagger — dá pra ver e testar todos os endpoints pelo navegador
+http://localhost:3000/api-docs
+
+Verificação simples: {"status":"ok"}
+http://localhost:3000/health
+
+
+Lista os fornecedores cadastrados
+http://localhost:3000/api/fornecedores
