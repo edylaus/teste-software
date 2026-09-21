@@ -33,7 +33,7 @@ function cnpjEhValido(cnpj) {
 }
 
 function camposObrigatoriosPresentes(body) {
-  const obrigatorios = ['razaoSocial', 'cnpj', 'endereco', 'telefone', 'email', 'segmento'];
+  const obrigatorios = ['razaoSocial', 'cnpj', 'telefone', 'email', 'categoria'];
   return obrigatorios.filter((campo) => {
     const valor = body[campo];
     return valor === undefined || valor === null || String(valor).trim() === '';
