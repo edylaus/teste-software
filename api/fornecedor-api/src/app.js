@@ -4,6 +4,7 @@ const swaggerUi = require('swagger-ui-express');
 
 const swaggerSpec = require('./config/swagger');
 const fornecedorRoutes = require('./routes/fornecedorRoutes');
+const authRoutes = require('./routes/authRoutes');
 const { errorHandler, notFoundHandler } = require('./middlewares/errorHandler');
 
 const app = express();
@@ -22,6 +23,8 @@ app.get('/health', (req, res) => {
 // Rotas do módulo fornecedor
 app.use('/api/fornecedores', fornecedorRoutes);
 
+// Rotas de autenticação
+app.use('/api', authRoutes);
 // 404 para rotas não mapeadas
 app.use(notFoundHandler);
 
