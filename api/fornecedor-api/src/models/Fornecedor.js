@@ -12,6 +12,10 @@ class Fornecedor {
     this.telefone = row.telefone;
     this.email = row.email;
     this.cep = row.cep;
+    this.rua = row.rua;
+    this.bairro = row.bairro;
+    this.numero = row.numero;
+    this.complemento = row.complemento;
     this.cidade = row.cidade;
     this.uf = row.uf;
     this.categoria = row.categoria;

@@ -16,6 +16,10 @@ cnpj: '11222333000181', // CNPJ com dígitos verificadores válidos
 telefone: '(62) 98888-7777',
 email: 'teste@empresateste.com',
 cep: '74000000',
+rua: 'Avenida Brasil',
+bairro: 'Setor Central',
+numero: '100',
+complemento: 'Sala 10',
 cidade: 'Goiânia',
 uf: 'GO',
 categoria: 'Tecnologia',
@@ -46,6 +50,10 @@ expect(resposta.body.cnpj).toBe('11222333000181');
 expect(resposta.body.razaoSocial).toBe('Empresa Teste Automatizado LTDA');
 expect(resposta.body.nomeFantasia).toBe('Empresa Teste');
 expect(resposta.body.categoria).toBe('Tecnologia');
+expect(resposta.body.rua).toBe('Avenida Brasil');
+expect(resposta.body.bairro).toBe('Setor Central');
+expect(resposta.body.numero).toBe('100');
+expect(resposta.body.complemento).toBe('Sala 10');
 
 });
 
@@ -115,6 +123,10 @@ const resposta = await request(app)
 expect(resposta.status).toBe(200);
 expect(resposta.body.id).toBe(criado.body.id);
 expect(resposta.body.nomeFantasia).toBe('Empresa Teste');
+expect(resposta.body.rua).toBe('Avenida Brasil');
+expect(resposta.body.bairro).toBe('Setor Central');
+expect(resposta.body.numero).toBe('100');
+expect(resposta.body.complemento).toBe('Sala 10');
 expect(resposta.body.cidade).toBe('Goiânia');
 expect(resposta.body.uf).toBe('GO');
 
@@ -168,6 +180,10 @@ const resposta = await request(app)
     razaoSocial: 'Empresa Teste Atualizada LTDA',
     nomeFantasia: 'Empresa Atualizada',
     telefone: '(62) 97777-6666',
+    rua: 'Rua Atualizada',
+    bairro: 'Setor Sul',
+    numero: '200-A',
+    complemento: 'Bloco B',
     cidade: 'Aparecida de Goiânia',
     categoria: 'Serviços',
   });
@@ -178,6 +194,10 @@ expect(resposta.body.razaoSocial).toBe(
 );
 expect(resposta.body.nomeFantasia).toBe('Empresa Atualizada');
 expect(resposta.body.telefone).toBe('(62) 97777-6666');
+expect(resposta.body.rua).toBe('Rua Atualizada');
+expect(resposta.body.bairro).toBe('Setor Sul');
+expect(resposta.body.numero).toBe('200-A');
+expect(resposta.body.complemento).toBe('Bloco B');
 expect(resposta.body.cidade).toBe('Aparecida de Goiânia');
 expect(resposta.body.categoria).toBe('Serviços');
 
