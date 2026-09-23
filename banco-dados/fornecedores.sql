@@ -44,7 +44,7 @@ CREATE TABLE `usuarios` (
   `id_usuario` int unsigned NOT NULL AUTO_INCREMENT,
   `nome` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `senha_hash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `senha` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `perfil` enum('ADMIN','OPERADOR','LEITURA') COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` enum('ATIVO','INATIVO','BLOQUEADO') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ATIVO',
   `data_cadastro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -54,10 +54,10 @@ CREATE TABLE `usuarios` (
   KEY `idx_usuarios_status` (`status`),
   KEY `idx_usuarios_perfil` (`perfil`),
   CONSTRAINT `chk_usuarios_email` CHECK (`email` like '%_@_%._%'),
-  CONSTRAINT `chk_usuarios_senha_hash` CHECK (char_length(`senha_hash`) > 0)
+  CONSTRAINT `chk_usuarios_senha` CHECK (char_length(`senha`) > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `usuarios` (`nome`, `email`, `senha_hash`, `perfil`, `status`)
+INSERT INTO `usuarios` (`nome`, `email`, `senha`, `perfil`, `status`)
 VALUES
   ('Administrador', 'admin@fornecedor.local', SHA2('admin123', 256), 'ADMIN', 'ATIVO'),
   ('Operador', 'operador@fornecedor.local', SHA2('operador123', 256), 'OPERADOR', 'ATIVO'),
