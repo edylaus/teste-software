@@ -115,6 +115,10 @@ A tabela `fornecedores` possui os seguintes campos:
 | `telefone`         | VARCHAR(20)  | Sim         | Telefone de contato               |
 | `email`            | VARCHAR(150) | Sim         | E-mail de contato                 |
 | `cep`              | VARCHAR(9)   | Não         | CEP do fornecedor                 |
+| `rua`              | VARCHAR(150) | Não         | Rua, avenida ou logradouro        |
+| `bairro`           | VARCHAR(100) | Não         | Bairro                             |
+| `numero`           | VARCHAR(20)  | Não         | Número do endereço                 |
+| `complemento`      | VARCHAR(100) | Não         | Complemento do endereço            |
 | `cidade`           | VARCHAR(100) | Não         | Cidade                            |
 | `uf`               | VARCHAR(2)   | Não         | Unidade Federativa                |
 | `categoria`        | VARCHAR(100) | Sim         | Categoria/segmento do fornecedor  |
@@ -227,6 +231,10 @@ curl -X POST http://localhost:3000/api/fornecedores \
     "telefone": "(62) 99999-9999",
     "email": "contato@empresa.com",
     "cep": "74000000",
+    "rua": "Avenida Brasil",
+    "bairro": "Setor Central",
+    "numero": "100",
+    "complemento": "Sala 10",
     "cidade": "Goiânia",
     "uf": "GO",
     "categoria": "Tecnologia"
@@ -244,6 +252,10 @@ Resposta (HTTP 201):
   "telefone": "(62) 99999-9999",
   "email": "contato@empresa.com",
   "cep": "74000000",
+  "rua": "Avenida Brasil",
+  "bairro": "Setor Central",
+  "numero": "100",
+  "complemento": "Sala 10",
   "cidade": "Goiânia",
   "uf": "GO",
   "categoria": "Tecnologia",
