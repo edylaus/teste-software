@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Fornecedor - Módulo Fornecedor</title>
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/fornecedor-cadastro.css">
+</head>
+<body>
+  <header class="app-header">
+    <span class="app-header__brand">Módulo Fornecedor</span>
+    <nav class="app-header__nav">
+      <a href="index.html">Login</a>
+      <a href="fornecedor-cadastro.html" class="ativo">Cadastrar Fornecedor</a>
+      <a href="fornecedor-listagem.html">Listar Fornecedores</a>
+    </nav>
+  </header>
+
+  <main class="form-container">
+    <h1>Cadastro de Fornecedor</h1>
+
+    <form id="form-fornecedor" novalidate>
+      <label for="razaoSocial">Razão social *</label>
+      <input type="text" id="razaoSocial" name="razaoSocial" required>
+
+      <label for="nomeFantasia">Nome fantasia</label>
+      <input type="text" id="nomeFantasia" name="nomeFantasia">
+
+      <label for="cnpj">CNPJ *</label>
+      <input type="text" id="cnpj" name="cnpj" inputmode="numeric" maxlength="18" placeholder="00.000.000/0000-00" required>
+
+      <label for="telefone">Telefone *</label>
+      <input type="text" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+
+      <label for="email">E-mail *</label>
+      <input type="email" id="email" name="email" required>
+
+      <div class="linha-dupla">
+        <div>
+          <label for="cep">CEP</label>
+          <input type="text" id="cep" name="cep" inputmode="numeric" maxlength="9" placeholder="00000-000">
+        </div>
+        <div>
+          <label for="uf">UF</label>
+          <select id="uf" name="uf">
+            <option value="">--</option>
+            <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+            <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+            <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+            <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+            <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+            <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+            <option>SP</option><option>SE</option><option>TO</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="cidade">Cidade</label>
+      <input type="text" id="cidade" name="cidade">
+
+      <label for="categoria">Categoria *</label>
+      <input type="text" id="categoria" name="categoria" list="lista-categorias" required>
+      <datalist id="lista-categorias">
+        <option value="Comercio">
+        <option value="Tecnologia">
+        <option value="Materiais de Escritorio">
+        <option value="Servicos">
+        <option value="Distribuicao">
+      </datalist>
+
+      <p id="mensagem" class="mensagem" role="alert"></p>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+  </main>
+  <script src="js/fornecedor-cadastro.js"></script>
+</body>
+</html>

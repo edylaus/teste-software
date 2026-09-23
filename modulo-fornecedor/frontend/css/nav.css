@@ -1,6 +1,6 @@
 .app-header {
   width: 100%;
-  max-width: 480px;
+  max-width: 640px;
   margin: 0 auto 16px;
   display: flex;
   align-items: center;
@@ -14,6 +14,7 @@
   color: #ffffff;
   font-size: 15px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .app-header__nav {
@@ -25,6 +26,7 @@
   color: #d1d5db;
   text-decoration: none;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .app-header__nav a:hover {

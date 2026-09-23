@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fornecedores - Módulo Fornecedor</title>
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/fornecedor-listagem.css">
+</head>
+<body>
+  <header class="app-header">
+    <span class="app-header__brand">Módulo Fornecedor</span>
+    <nav class="app-header__nav">
+      <a href="index.html">Login</a>
+      <a href="fornecedor-cadastro.html">Cadastrar Fornecedor</a>
+      <a href="fornecedor-listagem.html" class="ativo">Listar Fornecedores</a>
+    </nav>
+  </header>
+
+  <main class="listagem-container">
+    <div class="listagem-topo">
+      <h1>Fornecedores</h1>
+      <a class="botao-novo" href="fornecedor-cadastro.html">+ Novo fornecedor</a>
+    </div>
+
+    <div class="filtros">
+      <input type="text" id="busca" placeholder="Buscar por razão social ou CNPJ...">
+      <select id="filtroStatus">
+        <option value="">Todos os status</option>
+        <option value="ATIVO">Ativos</option>
+        <option value="INATIVO">Inativos</option>
+      </select>
+    </div>
+
+    <p id="mensagem" class="mensagem" role="alert"></p>
+
+    <div class="tabela-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Razão social</th>
+            <th>CNPJ</th>
+            <th>Telefone</th>
+            <th>Cidade/UF</th>
+            <th>Categoria</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="corpoTabela">
+          <!-- linhas inseridas via JS -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <script src="js/fornecedor-listagem.js"></script>
+</body>
+</html>
