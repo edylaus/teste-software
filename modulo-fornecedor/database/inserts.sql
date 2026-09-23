@@ -1,0 +1,19 @@
+USE `fornecedores`;
+
+INSERT INTO `fornecedores`
+  (`razao_social`, `nome_fantasia`, `cnpj`, `telefone`, `email`, `cep`, `cidade`, `uf`, `categoria`, `status`)
+VALUES
+  ('Empresa Alfa Comercio e Servicos Ltda', 'Alfa Comercio', '11222333000181', '(62) 3333-1000', 'contato@empresaalfa.com.br', '74000000', 'Goiânia', 'GO', 'Comercio', 'ATIVO'),
+  ('Beta Tecnologia Ltda', 'Beta Tech', '12345678901230', '(62) 3222-2000', 'contato@betatecnologia.com.br', '74000001', 'Anápolis', 'GO', 'Tecnologia', 'ATIVO'),
+  ('Gamma Materiais de Escritorio Ltda', 'Gamma Materiais', '98765432109874', '(62) 3444-3000', 'vendas@gammamateriais.com.br', '74000002', 'Aparecida de Goiânia', 'GO', 'Materiais de Escritório', 'ATIVO'),
+  ('Delta Servicos Gerais Ltda', 'Delta Serviços', '44556677889930', '(62) 3555-4000', 'contato@deltaservicos.com.br', '74000003', 'Goiânia', 'GO', 'Serviços', 'INATIVO'),
+  ('Epsilon Distribuidora Ltda', 'Epsilon', '45678901234567', '(62) 3666-5000', 'vendas@epsilondistribuidora.com.br', '74000004', 'Rio Verde', 'GO', 'Distribuicao', 'ATIVO');
+
+INSERT INTO `usuarios` (`nome`, `email`, `senha_hash`, `perfil`, `status`)
+VALUES
+  ('Administrador', 'admin@fornecedor.local', SHA2('admin123', 256), 'ADMIN', 'ATIVO'),
+  ('Operador', 'operador@fornecedor.local', SHA2('operador123', 256), 'OPERADOR', 'ATIVO'),
+  ('Leitura', 'leitura@fornecedor.local', SHA2('leitura123', 256), 'LEITURA', 'ATIVO');
+
+SELECT * FROM `usuarios`;
+SELECT * FROM `fornecedores`;
