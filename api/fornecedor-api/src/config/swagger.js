@@ -79,7 +79,7 @@ const options = {
         },
         FornecedorInput: {
           type: 'object',
-          required: ['razaoSocial', 'cnpj', 'endereco', 'telefone', 'email', 'segmento'],
+          required: ['razaoSocial', 'cnpj', 'telefone', 'email', 'categoria'],
           properties: {
             razaoSocial: { type: 'string', example: 'Empresa Exemplo LTDA', }, nomeFantasia: { type: 'string', nullable: true, example: 'Empresa Exemplo', }, cnpj: { type: 'string', example: '12345678000199', }, telefone: { type: 'string', example: '(62) 99999-9999', }, email: { type: 'string', format: 'email', example: 'contato@empresa.com', }, cep: { type: 'string', nullable: true, example: '74000000', }, cidade: { type: 'string', nullable: true, example: 'Goiânia', }, uf: { type: 'string', nullable: true, example: 'GO', },
             categoria: { type: 'string', example: 'Tecnologia' },
