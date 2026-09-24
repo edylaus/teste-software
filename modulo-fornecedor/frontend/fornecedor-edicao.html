@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Fornecedor - Módulo Fornecedor</title>
+  <title>Editar Fornecedor - Módulo Fornecedor</title>
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/fornecedor-cadastro.css">
 </head>
@@ -27,11 +27,11 @@
 
     <main class="app-main">
       <div class="form-container">
-        <a href="fornecedor-listagem.html" class="voltar">← Voltar</a>
-        <h1>Cadastrar fornecedor</h1>
-        <p class="subtitulo">Preencha os dados abaixo para cadastrar um novo fornecedor.</p>
+        <a href="fornecedor-listagem.html" class="voltar" id="linkVoltar">← Voltar</a>
+        <h1>Editar fornecedor</h1>
+        <p class="subtitulo" id="subtitulo">Carregando informações...</p>
 
-        <form id="form-fornecedor" novalidate>
+        <form id="form-fornecedor" novalidate hidden>
           <h2 class="secao-titulo">Dados do fornecedor</h2>
           <div class="linha-3">
             <div>
@@ -120,13 +120,14 @@
           <p id="mensagem" class="mensagem" role="alert"></p>
 
           <div class="botoes">
-            <a href="fornecedor-listagem.html" class="botao-cancelar">Cancelar</a>
-            <button type="submit">Cadastrar fornecedor</button>
+            <a href="fornecedor-listagem.html" class="botao-cancelar" id="linkCancelar">Cancelar</a>
+            <button type="submit">Salvar alterações</button>
           </div>
         </form>
+        <p id="mensagemCarregamento" class="mensagem erro" role="alert"></p>
       </div>
     </main>
   </div>
-  <script src="js/fornecedor-cadastro.js"></script>
+  <script src="js/fornecedor-edicao.js"></script>
 </body>
 </html>

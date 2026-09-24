@@ -4,55 +4,100 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fornecedores - Módulo Fornecedor</title>
-  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/fornecedor-listagem.css">
 </head>
 <body>
-  <header class="app-header">
-    <span class="app-header__brand">Módulo Fornecedor</span>
-    <nav class="app-header__nav">
-      <a href="index.html">Login</a>
-      <a href="fornecedor-cadastro.html">Cadastrar Fornecedor</a>
-      <a href="fornecedor-listagem.html" class="ativo">Listar Fornecedores</a>
-    </nav>
-  </header>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="app-sidebar__brand">Módulo Fornecedor</div>
+      <nav class="app-sidebar__nav">
+        <a href="#" class="app-sidebar__link"><span class="app-sidebar__icon">🏠</span> Início</a>
+        <a href="fornecedor-listagem.html" class="app-sidebar__link ativo"><span class="app-sidebar__icon">👥</span> Fornecedores</a>
+        <a href="#" class="app-sidebar__link"><span class="app-sidebar__icon">⚙️</span> Configurações</a>
+      </nav>
+      <div class="app-sidebar__user">
+        <div class="app-sidebar__avatar"></div>
+        <div>
+          <div class="app-sidebar__user-name">Usuário Logado</div>
+          <div class="app-sidebar__user-email">usuario@empresa.com</div>
+        </div>
+      </div>
+    </aside>
 
-  <main class="listagem-container">
-    <div class="listagem-topo">
-      <h1>Fornecedores</h1>
-      <a class="botao-novo" href="fornecedor-cadastro.html">+ Novo fornecedor</a>
-    </div>
+    <main class="app-main">
+      <div class="listagem-container">
+        <div class="topo">
+          <div>
+            <h1>Fornecedores</h1>
+            <p class="subtitulo">Gerencie os fornecedores cadastrados no sistema.</p>
+          </div>
+          <div class="topo-acoes">
+            <a href="fornecedor-cadastro.html" class="botao-novo">+ Cadastrar fornecedor</a>
+            <button type="button" class="icone-botao" title="Buscar">🔍</button>
+            <button type="button" class="icone-botao" id="botaoAtualizar" title="Atualizar">↻</button>
+          </div>
+        </div>
 
-    <div class="filtros">
-      <input type="text" id="busca" placeholder="Buscar por razão social ou CNPJ...">
-      <select id="filtroStatus">
-        <option value="">Todos os status</option>
-        <option value="ATIVO">Ativos</option>
-        <option value="INATIVO">Inativos</option>
-      </select>
-    </div>
+        <div class="filtros">
+          <div class="filtro-campo filtro-busca">
+            <label for="busca">Buscar</label>
+            <input type="text" id="busca" placeholder="Buscar por nome, CNPJ...">
+          </div>
+          <div class="filtro-campo">
+            <label for="filtroStatus">Status</label>
+            <select id="filtroStatus">
+              <option value="">Todos</option>
+              <option value="ATIVO">Ativo</option>
+              <option value="INATIVO">Inativo</option>
+            </select>
+          </div>
+          <div class="filtro-campo">
+            <label for="filtroCidade">Cidade</label>
+            <select id="filtroCidade">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div class="filtro-campo">
+            <label for="filtroEstado">Estado</label>
+            <select id="filtroEstado">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <button type="button" id="botaoFiltrar" class="botao-filtrar">Filtrar</button>
+        </div>
 
-    <p id="mensagem" class="mensagem" role="alert"></p>
+        <p id="mensagem" class="mensagem" role="alert"></p>
 
-    <div class="tabela-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Razão social</th>
-            <th>CNPJ</th>
-            <th>Telefone</th>
-            <th>Cidade/UF</th>
-            <th>Categoria</th>
-            <th>Status</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="corpoTabela">
-          <!-- linhas inseridas via JS -->
-        </tbody>
-      </table>
-    </div>
-  </main>
+        <div class="tabela-card">
+          <div class="tabela-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome/Razão Social</th>
+                  <th>CNPJ</th>
+                  <th>Telefone</th>
+                  <th>E-mail</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="corpoTabela"></tbody>
+            </table>
+          </div>
+
+          <div class="paginacao">
+            <span id="totalTexto">Mostrando 0 de 0 fornecedores</span>
+            <div class="paginacao-botoes">
+              <button type="button" disabled>Anterior</button>
+              <button type="button" class="pagina-atual">1</button>
+              <button type="button" disabled>Próximo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
   <script src="js/fornecedor-listagem.js"></script>
 </body>
 </html>

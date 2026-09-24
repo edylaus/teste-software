@@ -1,4 +1,4 @@
-const subtitulo = document.getElementById("subtitulo");
+ const subtitulo = document.getElementById("subtitulo");
 const topoAcoes = document.getElementById("topoAcoes");
 const detalhesCard = document.getElementById("detalhesCard");
 const mensagem = document.getElementById("mensagem");
