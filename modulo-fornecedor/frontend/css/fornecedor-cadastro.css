@@ -18,7 +18,7 @@ body {
 .form-container {
   background: #ffffff;
   width: 100%;
-  max-width: 480px;
+  max-width: 560px;
   padding: 32px;
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
@@ -29,6 +29,21 @@ body {
   text-align: center;
   margin-bottom: 24px;
   color: #1f2937;
+}
+
+.secao-titulo {
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #1f2937;
+  margin: 20px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.secao-titulo:first-child {
+  margin-top: 0;
 }
 
 label {
@@ -61,14 +76,33 @@ select.invalido {
   border-color: #dc2626;
 }
 
-.linha-dupla {
+.linha-2 {
   display: grid;
-  grid-template-columns: 1fr 100px;
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
 
+.linha-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .linha-2,
+  .linha-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.botoes {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
 button {
-  width: 100%;
+  flex: 1;
   padding: 11px;
   border: none;
   border-radius: 6px;
@@ -80,6 +114,22 @@ button {
 
 button:hover {
   background: #1d4ed8;
+}
+
+.botao-cancelar {
+  flex: 1;
+  padding: 11px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.botao-cancelar:hover {
+  background: #f0f2f5;
 }
 
 .mensagem {

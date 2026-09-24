@@ -2,16 +2,31 @@ const form = document.getElementById("form-fornecedor");
 const campoRazaoSocial = document.getElementById("razaoSocial");
 const campoNomeFantasia = document.getElementById("nomeFantasia");
 const campoCnpj = document.getElementById("cnpj");
-const campoEndereco = document.getElementById("endereco");
-const campoTelefone = document.getElementById("telefone");
-const campoEmail = document.getElementById("email");
+const campoCategoria = document.getElementById("categoria");
 const campoCep = document.getElementById("cep");
+const campoRua = document.getElementById("rua");
+const campoNumero = document.getElementById("numero");
+const campoComplemento = document.getElementById("complemento");
+const campoBairro = document.getElementById("bairro");
 const campoCidade = document.getElementById("cidade");
 const campoUf = document.getElementById("uf");
-const campoCategoria = document.getElementById("categoria");
+const campoEmail = document.getElementById("email");
+const campoTelefone = document.getElementById("telefone");
 const mensagem = document.getElementById("mensagem");
 
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+const CAMPOS_VALIDAVEIS = [
+  campoRazaoSocial,
+  campoCnpj,
+  campoCategoria,
+  campoCep,
+  campoRua,
+  campoNumero,
+  campoBairro,
+  campoEmail,
+  campoTelefone,
+];
 
 function mostrarMensagem(texto, tipo) {
   mensagem.textContent = texto;
@@ -19,9 +34,7 @@ function mostrarMensagem(texto, tipo) {
 }
 
 function limparErros() {
-  [campoRazaoSocial, campoCnpj, campoEndereco, campoTelefone, campoEmail, campoCategoria].forEach((campo) =>
-    campo.classList.remove("invalido")
-  );
+  CAMPOS_VALIDAVEIS.forEach((campo) => campo.classList.remove("invalido"));
   mensagem.textContent = "";
   mensagem.className = "mensagem";
 }
@@ -65,13 +78,12 @@ function cnpjEhValido(cnpj) {
 }
 
 // PONTO DE INTEGRAÇÃO (Dev 2):
-// substituir por um POST real em http://localhost:3000/api/fornecedores
-// (ver contrato em api/fornecedor-api/README.md).
-// Atenção: o campo "endereco" abaixo já bate com o que validarFornecedor.js
-// exige, mas ainda falta o Dev 3 criar a coluna "endereco" na tabela
-// fornecedores e o Dev 2 incluir esse campo no repository/service da API
-// (hoje eles só leem cep/cidade/uf/categoria, e a validação pede
-// "segmento" em vez de "categoria" — vale alinhar os dois nomes com o time).
+// substituir por um POST real em http://localhost:3000/api/fornecedores.
+// Atenção: os nomes de campo de endereço abaixo (rua, numero, complemento,
+// bairro) são os que aparecem no protótipo de UX/UI, mas ainda precisam
+// ser confirmados com o Dev 3 — as colunas que ele criou no banco podem
+// ter nomes diferentes (ex: "logradouro" em vez de "rua"). Ajustar aqui
+// assim que o nome real das colunas for confirmado.
 async function cadastrarFornecedor(dados) {
   return { ok: true };
 }
@@ -82,10 +94,13 @@ form.addEventListener("submit", async function (evento) {
 
   const razaoSocial = campoRazaoSocial.value.trim();
   const cnpj = campoCnpj.value.replace(/\D/g, "");
-  const endereco = campoEndereco.value.trim();
-  const telefone = campoTelefone.value.trim();
-  const email = campoEmail.value.trim();
   const categoria = campoCategoria.value.trim();
+  const cep = campoCep.value.replace(/\D/g, "");
+  const rua = campoRua.value.trim();
+  const numero = campoNumero.value.trim();
+  const bairro = campoBairro.value.trim();
+  const email = campoEmail.value.trim();
+  const telefone = campoTelefone.value.trim();
 
   if (razaoSocial.length < 3) {
     campoRazaoSocial.classList.add("invalido");
@@ -101,17 +116,38 @@ form.addEventListener("submit", async function (evento) {
     return;
   }
 
-  if (!endereco) {
-    campoEndereco.classList.add("invalido");
-    mostrarMensagem("Informe o endereço.", "erro");
-    campoEndereco.focus();
+  if (!categoria) {
+    campoCategoria.classList.add("invalido");
+    mostrarMensagem("Informe a categoria.", "erro");
+    campoCategoria.focus();
     return;
   }
 
-  if (!telefone) {
-    campoTelefone.classList.add("invalido");
-    mostrarMensagem("Informe o telefone.", "erro");
-    campoTelefone.focus();
+  if (cep.length !== 8) {
+    campoCep.classList.add("invalido");
+    mostrarMensagem("Informe um CEP válido.", "erro");
+    campoCep.focus();
+    return;
+  }
+
+  if (!rua) {
+    campoRua.classList.add("invalido");
+    mostrarMensagem("Informe a rua.", "erro");
+    campoRua.focus();
+    return;
+  }
+
+  if (!numero) {
+    campoNumero.classList.add("invalido");
+    mostrarMensagem("Informe o número.", "erro");
+    campoNumero.focus();
+    return;
+  }
+
+  if (!bairro) {
+    campoBairro.classList.add("invalido");
+    mostrarMensagem("Informe o bairro.", "erro");
+    campoBairro.focus();
     return;
   }
 
@@ -122,10 +158,10 @@ form.addEventListener("submit", async function (evento) {
     return;
   }
 
-  if (!categoria) {
-    campoCategoria.classList.add("invalido");
-    mostrarMensagem("Informe a categoria.", "erro");
-    campoCategoria.focus();
+  if (!telefone) {
+    campoTelefone.classList.add("invalido");
+    mostrarMensagem("Informe o telefone.", "erro");
+    campoTelefone.focus();
     return;
   }
 
@@ -133,13 +169,16 @@ form.addEventListener("submit", async function (evento) {
     razaoSocial,
     nomeFantasia: campoNomeFantasia.value.trim() || undefined,
     cnpj,
-    endereco,
-    telefone,
-    email,
-    cep: campoCep.value.replace(/\D/g, "") || undefined,
+    categoria,
+    cep,
+    rua,
+    numero,
+    complemento: campoComplemento.value.trim() || undefined,
+    bairro,
     cidade: campoCidade.value.trim() || undefined,
     uf: campoUf.value || undefined,
-    categoria,
+    email,
+    telefone,
   };
 
   try {
