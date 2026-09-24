@@ -2,6 +2,7 @@ const form = document.getElementById("form-fornecedor");
 const campoRazaoSocial = document.getElementById("razaoSocial");
 const campoNomeFantasia = document.getElementById("nomeFantasia");
 const campoCnpj = document.getElementById("cnpj");
+const campoEndereco = document.getElementById("endereco");
 const campoTelefone = document.getElementById("telefone");
 const campoEmail = document.getElementById("email");
 const campoCep = document.getElementById("cep");
@@ -18,7 +19,7 @@ function mostrarMensagem(texto, tipo) {
 }
 
 function limparErros() {
-  [campoRazaoSocial, campoCnpj, campoTelefone, campoEmail, campoCategoria].forEach((campo) =>
+  [campoRazaoSocial, campoCnpj, campoEndereco, campoTelefone, campoEmail, campoCategoria].forEach((campo) =>
     campo.classList.remove("invalido")
   );
   mensagem.textContent = "";
@@ -66,9 +67,11 @@ function cnpjEhValido(cnpj) {
 // PONTO DE INTEGRAÇÃO (Dev 2):
 // substituir por um POST real em http://localhost:3000/api/fornecedores
 // (ver contrato em api/fornecedor-api/README.md).
-// Atenção: hoje o middleware validarFornecedor.js exige "endereco" e "segmento",
-// campos que não existem na tabela nem no repository — isso vai travar qualquer
-// chamada real até o middleware ser corrigido para usar cep/cidade/uf/categoria.
+// Atenção: o campo "endereco" abaixo já bate com o que validarFornecedor.js
+// exige, mas ainda falta o Dev 3 criar a coluna "endereco" na tabela
+// fornecedores e o Dev 2 incluir esse campo no repository/service da API
+// (hoje eles só leem cep/cidade/uf/categoria, e a validação pede
+// "segmento" em vez de "categoria" — vale alinhar os dois nomes com o time).
 async function cadastrarFornecedor(dados) {
   return { ok: true };
 }
@@ -79,6 +82,7 @@ form.addEventListener("submit", async function (evento) {
 
   const razaoSocial = campoRazaoSocial.value.trim();
   const cnpj = campoCnpj.value.replace(/\D/g, "");
+  const endereco = campoEndereco.value.trim();
   const telefone = campoTelefone.value.trim();
   const email = campoEmail.value.trim();
   const categoria = campoCategoria.value.trim();
@@ -94,6 +98,13 @@ form.addEventListener("submit", async function (evento) {
     campoCnpj.classList.add("invalido");
     mostrarMensagem("CNPJ inválido.", "erro");
     campoCnpj.focus();
+    return;
+  }
+
+  if (!endereco) {
+    campoEndereco.classList.add("invalido");
+    mostrarMensagem("Informe o endereço.", "erro");
+    campoEndereco.focus();
     return;
   }
 
@@ -122,6 +133,7 @@ form.addEventListener("submit", async function (evento) {
     razaoSocial,
     nomeFantasia: campoNomeFantasia.value.trim() || undefined,
     cnpj,
+    endereco,
     telefone,
     email,
     cep: campoCep.value.replace(/\D/g, "") || undefined,
