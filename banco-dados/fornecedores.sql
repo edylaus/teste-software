@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS `fornecedores`;
-CREATE DATABASE `fornecedores` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `fornecedores`;
+DROP DATABASE IF EXISTS `fornecedor`;
+CREATE DATABASE `fornecedor` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `fornecedor`;
 
 CREATE TABLE `fornecedores` (
   `id_fornecedor` int unsigned NOT NULL AUTO_INCREMENT,
@@ -59,6 +59,6 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`nome`, `email`, `senha`, `perfil`, `status`)
 VALUES
-  ('Administrador', 'admin@fornecedor.local', SHA2('admin123', 256), 'ADMIN', 'ATIVO'),
-  ('Operador', 'operador@fornecedor.local', SHA2('operador123', 256), 'OPERADOR', 'ATIVO'),
-  ('Leitura', 'leitura@fornecedor.local', SHA2('leitura123', 256), 'LEITURA', 'ATIVO');
+  ('Administrador', 'admin@fornecedor.local', '$2b$10$B4ddLeEHj5IeAW.pW/AAm.wRplefv59qof0bUOtKgWEBXNEXsvVY.', 'ADMIN', 'ATIVO'),
+  ('Operador', 'operador@fornecedor.local', '$2b$10$zMBah3vRijr6a0fPlG4PKOIhYFq7rAZtzj4ZtwiarHiWM3BH9Xpny', 'OPERADOR', 'ATIVO'),
+  ('Leitura', 'leitura@fornecedor.local', '$2b$10$CZWujbj3uaQgmla.LNXozekGctDXDRnce/ys9I2hJKH.SillRIICi', 'LEITURA', 'ATIVO');
