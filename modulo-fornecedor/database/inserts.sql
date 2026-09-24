@@ -1,4 +1,4 @@
-USE `fornecedores`;
+USE `fornecedor`;
 
 INSERT INTO `fornecedores`
   (`razao_social`, `nome_fantasia`, `cnpj`, `telefone`, `email`, `cep`, `rua`, `bairro`, `numero`, `complemento`, `cidade`, `uf`, `categoria`, `status`)
