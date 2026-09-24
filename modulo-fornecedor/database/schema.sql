@@ -37,7 +37,7 @@ CREATE TABLE `usuarios` (
   `id_usuario` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(150) NOT NULL,
   `email` VARCHAR(150) NOT NULL,
-  `senha_hash` VARCHAR(255) NOT NULL,
+  `senha` VARCHAR(255) NOT NULL,
   `perfil` ENUM('ADMIN','OPERADOR','LEITURA') NOT NULL,
   `status` ENUM('ATIVO','INATIVO','BLOQUEADO') NOT NULL DEFAULT 'ATIVO',
   `data_cadastro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -47,5 +47,5 @@ CREATE TABLE `usuarios` (
   KEY `idx_usuarios_status` (`status`),
   KEY `idx_usuarios_perfil` (`perfil`),
   CONSTRAINT `chk_usuarios_email` CHECK (`email` LIKE '%_@_%._%'),
-  CONSTRAINT `chk_usuarios_senha_hash` CHECK (CHAR_LENGTH(`senha_hash`) > 0)
+  CONSTRAINT `chk_usuarios_senha` CHECK (CHAR_LENGTH(`senha`) > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

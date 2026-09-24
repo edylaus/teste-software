@@ -9,11 +9,11 @@ VALUES
   ('Delta Servicos Gerais Ltda', 'Delta Serviços', '44556677889930', '(62) 3555-4000', 'contato@deltaservicos.com.br', '74000003', 'Rua 10', 'Setor Oeste', '400', 'Bloco B', 'Goiânia', 'GO', 'Serviços', 'INATIVO'),
   ('Epsilon Distribuidora Ltda', 'Epsilon', '45678901234567', '(62) 3666-5000', 'vendas@epsilondistribuidora.com.br', '74000004', 'Avenida Rio Verde', 'Centro', '500', NULL, 'Rio Verde', 'GO', 'Distribuicao', 'ATIVO');
 
-INSERT INTO `usuarios` (`nome`, `email`, `senha_hash`, `perfil`, `status`)
+INSERT INTO `usuarios` (`nome`, `email`, `senha`, `perfil`, `status`)
 VALUES
-  ('Administrador', 'admin@fornecedor.local', SHA2('admin123', 256), 'ADMIN', 'ATIVO'),
-  ('Operador', 'operador@fornecedor.local', SHA2('operador123', 256), 'OPERADOR', 'ATIVO'),
-  ('Leitura', 'leitura@fornecedor.local', SHA2('leitura123', 256), 'LEITURA', 'ATIVO');
+  ('Administrador', 'admin@fornecedor.local', '$2b$10$B4ddLeEHj5IeAW.pW/AAm.wRplefv59qof0bUOtKgWEBXNEXsvVY.', 'ADMIN', 'ATIVO'),
+  ('Operador', 'operador@fornecedor.local', SHA2('$2b$10$zMBah3vRijr6a0fPlG4PKOIhYFq7rAZtzj4ZtwiarHiWM3BH9Xpny', 256), 'OPERADOR', 'ATIVO'),
+  ('Leitura', 'leitura@fornecedor.local', SHA2('$2b$10$CZWujbj3uaQgmla.LNXozekGctDXDRnce/ys9I2hJKH.SillRIICi', 256), 'LEITURA', 'ATIVO');
 
 SELECT * FROM `usuarios`;
 SELECT * FROM `fornecedores`;
