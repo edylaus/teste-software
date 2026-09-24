@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações - Módulo Fornecedor</title>
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/configuracoes.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="app-sidebar__brand">Módulo Fornecedor</div>
+      <nav class="app-sidebar__nav">
+        <a href="inicio.html" class="app-sidebar__link"><span class="app-sidebar__icon">🏠</span> Início</a>
+        <a href="fornecedor-listagem.html" class="app-sidebar__link"><span class="app-sidebar__icon">👥</span> Fornecedores</a>
+        <a href="configuracoes.html" class="app-sidebar__link ativo"><span class="app-sidebar__icon">⚙️</span> Configurações</a>
+      </nav>
+      <div class="app-sidebar__user">
+        <div class="app-sidebar__avatar"></div>
+        <div>
+          <div class="app-sidebar__user-name">Usuário Logado</div>
+          <div class="app-sidebar__user-email">usuario@empresa.com</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="config-container">
+        <div class="topo">
+          <h1>Configurações</h1>
+          <p class="subtitulo">Gerencie as preferências do sistema.</p>
+        </div>
+
+        <form id="formConfig" novalidate>
+          <section class="bloco">
+            <h2>Perfil do usuário</h2>
+            <div class="linha-2">
+              <div>
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome">
+              </div>
+              <div>
+                <label for="cargo">Cargo</label>
+                <input type="text" id="cargo" name="cargo">
+              </div>
+            </div>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email">
+          </section>
+
+          <section class="bloco">
+            <h2>Notificações</h2>
+            <div class="opcao">
+              <div>
+                <span class="opcao-titulo">Notificações por e-mail</span>
+                <span class="opcao-descricao">Receba avisos de novos fornecedores por e-mail.</span>
+              </div>
+              <label class="chave">
+                <input type="checkbox" id="notifEmail" aria-label="Notificações por e-mail">
+                <span class="chave-trilho"></span>
+              </label>
+            </div>
+            <div class="opcao">
+              <div>
+                <span class="opcao-titulo">Notificações no sistema</span>
+                <span class="opcao-descricao">Exibir alertas dentro do sistema.</span>
+              </div>
+              <label class="chave">
+                <input type="checkbox" id="notifSistema" aria-label="Notificações no sistema">
+                <span class="chave-trilho"></span>
+              </label>
+            </div>
+            <div class="opcao">
+              <div>
+                <span class="opcao-titulo">Alertas de fornecedores pendentes</span>
+                <span class="opcao-descricao">Avisar quando houver fornecedores aguardando aprovação.</span>
+              </div>
+              <label class="chave">
+                <input type="checkbox" id="alertaPendentes" aria-label="Alertas de fornecedores pendentes">
+                <span class="chave-trilho"></span>
+              </label>
+            </div>
+          </section>
+
+          <section class="bloco">
+            <h2>Sistema</h2>
+            <div class="linha-2">
+              <div>
+                <label for="idioma">Idioma</label>
+                <select id="idioma" name="idioma">
+                  <option value="pt-BR">Português (Brasil)</option>
+                  <option value="en-US">English (US)</option>
+                  <option value="es">Español</option>
+                </select>
+              </div>
+              <div>
+                <label for="itensPorPagina">Itens por página</label>
+                <select id="itensPorPagina" name="itensPorPagina">
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <div class="rodape">
+            <p id="mensagem" class="mensagem" role="alert"></p>
+            <button type="submit" class="botao-salvar">Salvar configurações</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/configuracoes.js"></script>
+</body>
+</html>

@@ -47,10 +47,9 @@ form.addEventListener("submit", async function (evento) {
 
     if (resposta.ok) {
       mostrarMensagem("Login validado. Redirecionando...", "sucesso");
-      // Navegação entre telas: por enquanto o "destino" pós-login é o
-      // cadastro de fornecedor, já que ainda é a única tela do módulo.
+      // Depois do login, o usuário vai para a tela Início (dashboard).
       setTimeout(() => {
-        window.location.href = "fornecedor-cadastro.html";
+        window.location.href = "inicio.html";
       }, 700);
     } else {
       mostrarMensagem("Usuário ou senha inválidos.", "erro");
