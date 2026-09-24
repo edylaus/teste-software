@@ -12,8 +12,8 @@ VALUES
 INSERT INTO `usuarios` (`nome`, `email`, `senha`, `perfil`, `status`)
 VALUES
   ('Administrador', 'admin@fornecedor.local', '$2b$10$B4ddLeEHj5IeAW.pW/AAm.wRplefv59qof0bUOtKgWEBXNEXsvVY.', 'ADMIN', 'ATIVO'),
-  ('Operador', 'operador@fornecedor.local', SHA2('$2b$10$zMBah3vRijr6a0fPlG4PKOIhYFq7rAZtzj4ZtwiarHiWM3BH9Xpny', 256), 'OPERADOR', 'ATIVO'),
-  ('Leitura', 'leitura@fornecedor.local', SHA2('$2b$10$CZWujbj3uaQgmla.LNXozekGctDXDRnce/ys9I2hJKH.SillRIICi', 256), 'LEITURA', 'ATIVO');
+  ('Operador', 'operador@fornecedor.local', '$2b$10$zMBah3vRijr6a0fPlG4PKOIhYFq7rAZtzj4ZtwiarHiWM3BH9Xpny', 'OPERADOR', 'ATIVO'),
+  ('Leitura', 'leitura@fornecedor.local', '$2b$10$CZWujbj3uaQgmla.LNXozekGctDXDRnce/ys9I2hJKH.SillRIICi', 'LEITURA', 'ATIVO');
 
 SELECT * FROM `usuarios`;
 SELECT * FROM `fornecedores`;
