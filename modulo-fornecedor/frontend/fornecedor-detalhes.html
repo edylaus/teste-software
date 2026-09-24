@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Fornecedor - Módulo Fornecedor</title>
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/fornecedor-detalhes.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="app-sidebar__brand">Módulo Fornecedor</div>
+      <nav class="app-sidebar__nav">
+        <a href="#" class="app-sidebar__link"><span class="app-sidebar__icon">🏠</span> Início</a>
+        <a href="fornecedor-listagem.html" class="app-sidebar__link ativo"><span class="app-sidebar__icon">👥</span> Fornecedores</a>
+        <a href="#" class="app-sidebar__link"><span class="app-sidebar__icon">⚙️</span> Configurações</a>
+      </nav>
+      <div class="app-sidebar__user">
+        <div class="app-sidebar__avatar"></div>
+        <div>
+          <div class="app-sidebar__user-name">Usuário Logado</div>
+          <div class="app-sidebar__user-email">usuario@empresa.com</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="detalhes-container">
+        <a href="fornecedor-listagem.html" class="voltar">← Voltar</a>
+
+        <div class="topo">
+          <div>
+            <h1>Detalhes do fornecedor</h1>
+            <p class="subtitulo" id="subtitulo">Carregando informações...</p>
+          </div>
+          <div class="topo-acoes" id="topoAcoes" hidden>
+            <button type="button" class="botao botao-contorno" id="botaoEditar">✎ Editar fornecedor</button>
+            <button type="button" class="botao botao-perigo" id="botaoStatus">⊘ Inativar fornecedor</button>
+            <button type="button" class="botao botao-perigo" id="botaoExcluir">⊗ Excluir</button>
+            <a href="fornecedor-listagem.html" class="icone-botao" title="Buscar fornecedores">🔍</a>
+            <button type="button" class="icone-botao" id="botaoAtualizar" title="Atualizar">↻</button>
+          </div>
+        </div>
+
+        <p id="mensagem" class="mensagem" role="alert"></p>
+
+        <div class="detalhes-card" id="detalhesCard" hidden>
+          <h2 class="secao-titulo">Dados do fornecedor</h2>
+          <div class="grade">
+            <div class="campo"><span class="campo-rotulo">Razão Social</span><span class="campo-valor" id="razaoSocial"></span></div>
+            <div class="campo"><span class="campo-rotulo">CNPJ</span><span class="campo-valor" id="cnpj"></span></div>
+            <div class="campo"><span class="campo-rotulo">Nome Fantasia</span><span class="campo-valor" id="nomeFantasia"></span></div>
+            <div class="campo"><span class="campo-rotulo">Categoria</span><span class="campo-valor" id="categoria"></span></div>
+          </div>
+
+          <h2 class="secao-titulo">Contato</h2>
+          <div class="grade">
+            <div class="campo"><span class="campo-rotulo">E-mail</span><span class="campo-valor" id="email"></span></div>
+            <div class="campo"><span class="campo-rotulo">Telefone</span><span class="campo-valor" id="telefone"></span></div>
+          </div>
+
+          <h2 class="secao-titulo">Endereço</h2>
+          <div class="grade">
+            <div class="campo"><span class="campo-rotulo">CEP</span><span class="campo-valor" id="cep"></span></div>
+            <div class="campo"><span class="campo-rotulo">Rua</span><span class="campo-valor" id="rua"></span></div>
+            <div class="campo"><span class="campo-rotulo">Número</span><span class="campo-valor" id="numero"></span></div>
+            <div class="campo"><span class="campo-rotulo">Complemento</span><span class="campo-valor" id="complemento"></span></div>
+            <div class="campo"><span class="campo-rotulo">Bairro</span><span class="campo-valor" id="bairro"></span></div>
+            <div class="campo"><span class="campo-rotulo">Cidade / Estado</span><span class="campo-valor" id="cidadeUf"></span></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/modal.js"></script>
+  <script src="js/fornecedor-detalhes.js"></script>
+</body>
+</html>
