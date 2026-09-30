@@ -60,7 +60,11 @@ form.addEventListener("submit", async function (evento) {
     const resposta = await autenticar(usuario, senha);
 
     if (resposta.ok) {
-      mostrarMensagem("Login validado.", "sucesso");
+      mostrarMensagem("Login validado. Redirecionando...", "sucesso");
+      // Depois do login, o usuário vai para a tela Início (dashboard).
+      setTimeout(() => {
+        window.location.href = "inicio.html";
+      }, 700);
     } else {
       mostrarMensagem("Usuário ou senha inválidos.", "erro");
     }

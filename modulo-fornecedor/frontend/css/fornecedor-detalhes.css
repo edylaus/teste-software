@@ -1,0 +1,162 @@
+.detalhes-container {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.voltar {
+  display: inline-block;
+  font-size: 13px;
+  color: #64748b;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.voltar:hover {
+  color: #0f172a;
+}
+
+.topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.topo h1 {
+  font-size: 22px;
+  color: #0f172a;
+}
+
+.subtitulo {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.topo-acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.topo-acoes[hidden] {
+  display: none;
+}
+
+.botao {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.botao-contorno {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+}
+
+.botao-contorno:hover {
+  background: #f1f5f9;
+}
+
+.botao-perigo {
+  background: #e5484d;
+  color: #ffffff;
+  border: 1px solid #e5484d;
+}
+
+.botao-perigo:hover {
+  background: #cd3a3f;
+}
+
+.icone-botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.icone-botao:hover {
+  background: #f1f5f9;
+}
+
+.mensagem {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.mensagem:empty {
+  display: none;
+}
+
+.mensagem.sucesso {
+  color: #15803d;
+}
+
+.mensagem.erro {
+  color: #dc2626;
+}
+
+.detalhes-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px 28px;
+}
+
+.secao-titulo {
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0f172a;
+  margin: 24px 0 12px;
+}
+
+.secao-titulo:first-child {
+  margin-top: 0;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 24px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.campo-rotulo {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.campo-valor {
+  font-size: 15px;
+  font-weight: bold;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+@media (max-width: 640px) {
+  .grade {
+    grid-template-columns: 1fr;
+  }
+}
