@@ -16,16 +16,14 @@ function formatarCnpj(cnpj) {
   return cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
 }
 
-// PONTO DE INTEGRAÇÃO (Dev 2):
-// substituir pelo GET real em http://localhost:3000/api/fornecedores.
 async function listarFornecedores() {
-  return [
-    { id_fornecedor: 1, razao_social: "Empresa Alfa Comercio e Servicos Ltda", cnpj: "12345678000190", email: "contato@empresaalfa.com.br", status: "ATIVO", data_cadastro: "2026-09-01T10:00:00" },
-    { id_fornecedor: 2, razao_social: "Beta Tecnologia Ltda", cnpj: "23456789000101", email: "contato@betatecnologia.com.br", status: "ATIVO", data_cadastro: "2026-09-05T14:30:00" },
-    { id_fornecedor: 3, razao_social: "Gamma Materiais de Escritorio Ltda", cnpj: "34567890000112", email: "vendas@gammamateriais.com.br", status: "ATIVO", data_cadastro: "2026-09-10T09:15:00" },
-    { id_fornecedor: 4, razao_social: "Delta Servicos Gerais Ltda", cnpj: "45678901000123", email: "contato@deltaservicos.com.br", status: "INATIVO", data_cadastro: "2026-09-15T16:45:00" },
-    { id_fornecedor: 5, razao_social: "Epsilon Distribuidora Ltda", cnpj: "56789012000134", email: "vendas@epsilondistribuidora.com.br", status: "ATIVO", data_cadastro: "2026-09-20T11:20:00" },
-  ];
+  const resposta = await fetch("http://localhost:3000/api/fornecedores");
+
+  if (!resposta.ok) {
+    throw new Error("Erro ao buscar fornecedores");
+  }
+
+  return resposta.json();
 }
 
 function renderizarResumo(fornecedores) {
@@ -44,7 +42,7 @@ function renderizarRecentes(fornecedores) {
   }
 
   const recentes = [...fornecedores]
-    .sort((a, b) => new Date(b.data_cadastro) - new Date(a.data_cadastro))
+    .sort((a, b) => new Date(b.dataCadastro) - new Date(a.dataCadastro))
     .slice(0, QUANTIDADE_RECENTES);
 
   recentes.forEach((f) => {
@@ -56,7 +54,7 @@ function renderizarRecentes(fornecedores) {
       <td></td>
       <td><span class="badge ${ativo ? "ativo" : "inativo"}">${ativo ? "Ativo" : "Inativo"}</span></td>
     `;
-    tr.children[0].textContent = f.razao_social;
+    tr.children[0].textContent = f.razaoSocial;
     tr.children[2].textContent = f.email;
     corpoRecentes.appendChild(tr);
   });
