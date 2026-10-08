@@ -85,6 +85,18 @@ function cnpjEhValido(cnpj) {
 // ter nomes diferentes (ex: "logradouro" em vez de "rua"). Ajustar aqui
 // assim que o nome real das colunas for confirmado.
 async function cadastrarFornecedor(dados) {
+  const resposta = await fetch("http://localhost:3000/api/fornecedores", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dados),
+  });
+
+  if (!resposta.ok) {
+    throw new Error("Erro ao cadastrar fornecedor");
+  }
+
   return { ok: true };
 }
 

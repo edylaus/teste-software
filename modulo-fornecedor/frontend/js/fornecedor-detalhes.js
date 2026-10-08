@@ -24,31 +24,47 @@ function formatarCep(cep) {
 }
 
 function nomeExibicao(f) {
-  return f.nome_fantasia || f.razao_social;
+  return f.nomeFantasia || f.razaoSocial;
 }
 
 // PONTO DE INTEGRAÇÃO (Dev 2):
 // substituir pelo GET real em http://localhost:3000/api/fornecedores/:id.
 // Os nomes rua/numero/complemento/bairro ainda precisam ser confirmados com o Dev 3.
 async function buscarFornecedorPorId(id) {
-  const dados = [
-    { id_fornecedor: 1, razao_social: "Empresa Alfa Comercio e Servicos Ltda", nome_fantasia: "Alfa Comercio", cnpj: "12345678000190", telefone: "(62) 3333-1000", email: "contato@empresaalfa.com.br", cep: "74000000", rua: "Rua 10", numero: "100", complemento: "Sala 1", bairro: "Setor Central", cidade: "Goiania", uf: "GO", categoria: "Comercio", status: "ATIVO" },
-    { id_fornecedor: 2, razao_social: "Beta Tecnologia Ltda", nome_fantasia: "Beta Tech", cnpj: "23456789000101", telefone: "(62) 3222-2000", email: "contato@betatecnologia.com.br", cep: "74110000", rua: "Avenida T-4", numero: "250", complemento: "", bairro: "Setor Bueno", cidade: "Goiania", uf: "GO", categoria: "Tecnologia", status: "ATIVO" },
-    { id_fornecedor: 3, razao_social: "Gamma Materiais de Escritorio Ltda", nome_fantasia: "Gamma Materiais", cnpj: "34567890000112", telefone: "(62) 3444-3000", email: "vendas@gammamateriais.com.br", cep: "74150000", rua: "Rua 9", numero: "35", complemento: "Loja 2", bairro: "Setor Oeste", cidade: "Goiania", uf: "GO", categoria: "Materiais de Escritorio", status: "ATIVO" },
-    { id_fornecedor: 4, razao_social: "Delta Servicos Gerais Ltda", nome_fantasia: "Delta Servicos", cnpj: "45678901000123", telefone: "(62) 3555-4000", email: "contato@deltaservicos.com.br", cep: "74210000", rua: "Avenida 85", numero: "1200", complemento: "", bairro: "Setor Marista", cidade: "Goiania", uf: "GO", categoria: "Servicos", status: "INATIVO" },
-    { id_fornecedor: 5, razao_social: "Epsilon Distribuidora Ltda", nome_fantasia: "Epsilon", cnpj: "56789012000134", telefone: "(62) 3666-5000", email: "vendas@epsilondistribuidora.com.br", cep: "74310000", rua: "Rua C-137", numero: "48", complemento: "Galpao 3", bairro: "Jardim America", cidade: "Goiania", uf: "GO", categoria: "Distribuicao", status: "ATIVO" },
-  ];
-  return dados.find((f) => f.id_fornecedor === id) || null;
+  const resposta = await fetch(`http://localhost:3000/api/fornecedores/${id}`);
+
+  if (!resposta.ok) {
+    throw new Error("Erro ao buscar fornecedor");
+  }
+
+  return resposta.json();
 }
 
 // PONTO DE INTEGRAÇÃO (Dev 2): PATCH /api/fornecedores/:id/inativar ou /reativar.
 async function alterarStatusFornecedor(id, novoStatus) {
-  if (fornecedor) fornecedor.status = novoStatus;
-  return { ok: true };
+  const acao = novoStatus === "INATIVO" ? "inativar" : "reativar";
+
+  const resposta = await fetch(`http://localhost:3000/api/fornecedores/${id}/${acao}`, {
+    method: "PATCH",
+  });
+
+  if (!resposta.ok) {
+    throw new Error("Erro ao alterar status do fornecedor");
+  }
+
+  return resposta.json();
 }
 
 // PONTO DE INTEGRAÇÃO (Dev 2): DELETE /api/fornecedores/:id.
 async function excluirFornecedor(id) {
+  const resposta = await fetch(`http://localhost:3000/api/fornecedores/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!resposta.ok) {
+    throw new Error("Erro ao excluir fornecedor");
+  }
+
   return { ok: true };
 }
 
@@ -56,9 +72,9 @@ function preencherTela() {
   const texto = (valor) => valor || "—";
 
   subtitulo.textContent = `Visualize as informações cadastradas de ${nomeExibicao(fornecedor)}.`;
-  document.getElementById("razaoSocial").textContent = texto(fornecedor.razao_social);
+  document.getElementById("razaoSocial").textContent = texto(fornecedor.razaoSocial);
   document.getElementById("cnpj").textContent = formatarCnpj(fornecedor.cnpj);
-  document.getElementById("nomeFantasia").textContent = texto(fornecedor.nome_fantasia);
+  document.getElementById("nomeFantasia").textContent = texto(fornecedor.nomeFantasia);
   document.getElementById("categoria").textContent = texto(fornecedor.categoria);
   document.getElementById("email").textContent = texto(fornecedor.email);
   document.getElementById("telefone").textContent = texto(fornecedor.telefone);
@@ -104,7 +120,7 @@ async function carregar() {
 }
 
 botaoEditar.addEventListener("click", () => {
-  window.location.href = `fornecedor-edicao.html?id=${fornecedor.id_fornecedor}`;
+  window.location.href = `fornecedor-edicao.html?id=${fornecedor.id}`;
 });
 
 botaoStatus.addEventListener("click", async () => {
@@ -126,9 +142,14 @@ botaoStatus.addEventListener("click", async () => {
   if (!confirmou) return;
 
   const novoStatus = vaiInativar ? "INATIVO" : "ATIVO";
-  await alterarStatusFornecedor(fornecedor.id_fornecedor, novoStatus);
-  preencherTela();
-  mostrarMensagem(vaiInativar ? "Fornecedor inativado." : "Fornecedor ativado.", "sucesso");
+  try {
+    await alterarStatusFornecedor(fornecedor.id, novoStatus);
+    fornecedor = await buscarFornecedorPorId(fornecedor.id);
+    preencherTela();
+    mostrarMensagem(vaiInativar ? "Fornecedor inativado." : "Fornecedor ativado.", "sucesso");
+  } catch (erro) {
+    mostrarMensagem("Não foi possível concluir a operação. Atualize a página para conferir o status.", "erro");
+  }
 });
 
 botaoExcluir.addEventListener("click", async () => {
@@ -139,12 +160,16 @@ botaoExcluir.addEventListener("click", async () => {
   });
   if (!confirmou) return;
 
-  await excluirFornecedor(fornecedor.id_fornecedor);
-  mostrarMensagem("Fornecedor excluído. Voltando para a listagem...", "sucesso");
-  topoAcoes.hidden = true;
-  setTimeout(() => {
-    window.location.href = "fornecedor-listagem.html";
-  }, 1200);
+    try {
+    await excluirFornecedor(fornecedor.id);
+    mostrarMensagem("Fornecedor excluído. Voltando para a listagem...", "sucesso");
+    topoAcoes.hidden = true;
+    setTimeout(() => {
+      window.location.href = "fornecedor-listagem.html";
+    }, 1200);
+  } catch (erro) {
+    mostrarMensagem("Não foi possível excluir o fornecedor. Tente novamente.", "erro");
+  }
 });
 
 botaoAtualizar.addEventListener("click", carregar);
