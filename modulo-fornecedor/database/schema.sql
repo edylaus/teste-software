@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `fornecedores` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `fornecedores`;
+CREATE DATABASE IF NOT EXISTS `fornecedor` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `fornecedor`;
 
 DROP TABLE IF EXISTS `fornecedores`;
 DROP TABLE IF EXISTS `usuarios`;

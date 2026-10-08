@@ -107,7 +107,7 @@ router.get('/cnpj/:cnpj', fornecedorController.buscarPorCnpj);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Fornecedor'
+ *               $ref: '#/components/schemeas/Fornecedor'
  *       404:
  *         description: Fornecedor não encontrado
  *         content:

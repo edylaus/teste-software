@@ -13,3 +13,8 @@ http://localhost:3000/health
 
 Lista os fornecedores cadastrados
 http://localhost:3000/api/fornecedores
+
+Senha bcrypt
+node -e "const bcrypt=require('bcryptjs'); console.log(bcrypt.hashSync('admin123', 10))"
+node -e "const bcrypt=require('bcryptjs'); console.log(bcrypt.hashSync('operador123', 10))"
+node -e "const bcrypt=require('bcryptjs'); console.log(bcrypt.hashSync('leitura123', 10))"
